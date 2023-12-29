@@ -42,6 +42,120 @@ tab_chain <- fluidPage(
 
 
 ################################################################################
+########### HMM tab ############################################################
+################################################################################
+
+
+tab_hmm <- fluidPage(
+  fluidRow(
+    column(6,
+           h3("Simulate HMM"),
+           
+           div(class = "label-left",
+               sliderInput(
+                 inputId = "hmm_sim_random_seed",
+                 label = "Random seed:",
+                 min=0,
+                 max=10,
+                 step = 1,
+                 value=1
+               ),
+               
+               sliderInput(
+                 inputId = "hmm_sim_numsample",
+                 label = "Number of samples:",
+                 min=1,
+                 max=5000,
+                 step=1,
+                 value=100
+               ),
+               
+               sliderInput(
+                 inputId = "hmm_sim_nstate",
+                 label = "Number of states:",
+                 min=1,
+                 max=10,
+                 step=1,
+                 value=2
+               ),
+               
+               
+               sliderInput(
+                 inputId = "hmm_sim_numemit",
+                 label = "Number of symbols emitted:",
+                 min=1,
+                 max=20,
+                 step=1,
+                 value=4
+               ),
+               
+               sliderInput(
+                 inputId = "hmm_sim_stayweight",
+                 label = "Tendency to stay:",
+                 min=0,
+                 max=10,
+                 step=0.01,
+                 value=1
+               ),
+               
+           ),
+
+           
+           actionButton("hmm_generate", "Simulate HMM"),
+           
+           
+    ),
+    column(6,
+           h3("Fit HMM"),
+           
+           div(class = "label-left",
+               sliderInput(
+                 inputId = "hmm_fit_random_seed",
+                 label = "Random seed:",
+                 min=0,
+                 max=10,
+                 step = 1,
+                 value=1
+               ),
+               
+               
+               sliderInput(
+                 inputId = "hmm_fit_nstate",
+                 label = "Assume number of states:",
+                 min=1,
+                 max=10,
+                 step=1,
+                 value=2
+               ),
+           ),
+           actionButton("hmm_fit", "Fit HMM"),
+           
+    ),
+  ),
+  fluidRow(
+    column(6,
+           h3("Simulated HMM"),
+           plotOutput("hmm_plot_sim"),
+           p("Transition matrix"),
+           tableOutput("hmm_sim_trans"),
+           p("Emission matrix"),
+           tableOutput("hmm_sim_emit"),
+    ),
+    column(6,
+           h3("Fitted HMM"),
+           plotOutput("hmm_plot_fit"),
+           p("Fitted transition matrix"),
+           tableOutput("hmm_fit_trans"),
+           p("Fitted emission matrix"),
+           tableOutput("hmm_fit_emit"),
+
+    ),
+  ),
+
+)
+
+
+################################################################################
 ########### Total page #########################################################
 ################################################################################
 
@@ -74,6 +188,7 @@ ui <- fluidPage(
 
   mainPanel(
     tabsetPanel(type = "tabs",
+                tabPanel("HMM", tab_hmm),
                 tabPanel("Markov chain", tab_chain),
                 tabPanel("About", tab_about)
     )

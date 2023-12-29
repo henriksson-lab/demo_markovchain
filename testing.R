@@ -8,10 +8,6 @@ reactive <- function(f) function() f
 
 
 
-
-library(depmixS4)
-
-
 ################################################################################
 ################################################################################
 ################################################################################
@@ -85,8 +81,11 @@ fitted.emission <- t(sapply(fitted.emission, function(x) x@parameters$coefficien
 fitted.trans <- fit.mod@transition
 fitted.trans <- t(sapply(fitted.trans, function(x) x@parameters$coefficients))
 
+fitted.emission
 thedat$emissionprob
+
 thedat$transprob
+fitted.trans
 
 
 
@@ -99,6 +98,18 @@ library(markovchain)
 transmat <- new("markovchain", states = colnames(thedat$transprob), byrow = FALSE,
   transitionMatrix = thedat$transprob, name = "Weather")
 plot(transmat)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

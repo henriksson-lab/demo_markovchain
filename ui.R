@@ -1,3 +1,5 @@
+options(shiny.sanitize.errors = FALSE)
+
 library(plotly)
 library(shiny)
 library(ggplot2)

@@ -1,3 +1,11 @@
+if(FALSE){
+  options(shiny.sanitize.errors = FALSE)
+  # logging level DEBUG
+  logging::basicConfig(level = 10)
+  # write logging output to the stderr file
+  logging::addHandler(logging::writeToFile, logger = '', file = stderr())
+}
+
 library(plotly)
 library(Cairo)
 library(HMM)
